@@ -1,0 +1,34 @@
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #b3dced 0%, #29b8e5 50%, #bce0ee 100%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card {
+  width: 80% !important;
+  border-radius: 0px 0px 8px 8px !important;
+  background-image: radial-gradient(
+    circle,
+    #22bfe0,
+    #06cfea,
+    #00dff3,
+    #00eff9,
+    #0dfffe
+  );
+}
+
+.navbar {
+  border-radius: 8px 8px 0px 0px !important;
+  width: 80%;
+  background-image: radial-gradient(
+    circle,
+    #22bfe0,
+    #06cfea,
+    #00dff3,
+    #00eff9,
+    #0dfffe
+  );
+}

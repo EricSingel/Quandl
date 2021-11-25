@@ -17,12 +17,12 @@
     <nav class="navbar navbar-light">
       <div class="container-fluid">
         <a class="navbar-brand">Bitcoinkurs</a>
-        <form class="d-flex" onsubmit="search()">
+        <form class="d-flex" onsubmit="loadCourse(); return false;">
           <p class="m-2">Von</p>
-          <input required class="form-control me-2" type="date" />
+          <input id="from" required class="form-control me-2" type="date" />
           <p class="m-2">Bis</p>
-          <input required class="form-control me-2" type="date" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input id="to" required class="form-control me-2" type="date" />
+          <button class="btn btn-outline-success">Search</button>
         </form>
       </div>
     </nav>

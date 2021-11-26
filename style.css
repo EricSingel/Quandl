@@ -18,6 +18,7 @@ body {
     #00eff9,
     #0dfffe
   );
+  border: none !important;
 }
 
 .navbar {
@@ -31,4 +32,10 @@ body {
     #00eff9,
     #0dfffe
   );
+}
+
+@media all and (max-width: 800px) {
+  .navbar {
+    justify-content: center !important;
+  }
 }

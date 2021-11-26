@@ -1,6 +1,7 @@
 const API_KEY = 'ZT9zbksxz3axS6muNArG';
-var ctxL = document.getElementById('lineChart').getContext('2d');
-var myLineChart = new Chart(ctxL, drawChart());
+let ctxL = document.getElementById('lineChart').getContext('2d');
+let myLineChart = new Chart(ctxL, drawChart());
+
 function drawChart() {
   return {
     type: 'bar',
@@ -30,32 +31,50 @@ function drawChart() {
 }
 async function loadCourse() {
   let from = document.getElementById('from').value;
-  let fromToDate = new Date(from);
+  // let fromToDate = new Date(from);
   let to = document.getElementById('to').value;
-  let toToDate = new Date(to);
-  let days = getDays(fromToDate, toToDate);
-  // console.log(to.getDate() - from.getDate());
+  // let toToDate = new Date(to);
+  // let days = getDays(fromToDate, toToDate);
   let url = `https://data.nasdaq.com/api/v3/datasets/BITFINEX/LUNAF0USTF0?start_date=${from}&end_date=${to}&api_key=ZT9zbksxz3axS6muNArG`;
   let response = await fetch(url);
   let responseAsJson = await response.json();
+  updateChart(responseAsJson);
+}
+
+// function getDays(from, to) {
+//   let difference = Math.abs(to - from);
+//   let days = difference / (1000 * 60 * 60 * 24);
+
+//   return days;
+// }
+
+function updateChart(responseAsJson) {
   let dataLength = responseAsJson.dataset.data.length;
   let data = responseAsJson.dataset.data;
-  console.log('API answers:', responseAsJson);
+  let lineChartDataFirst = myLineChart.data.datasets[0].data;
+  let lineChartDataSecond = myLineChart.data.datasets[1].data;
+  let lineChartLabels = myLineChart.data.labels;
+
+  removeData(myLineChart, 100);
 
   for (let i = 0; i < dataLength; i++) {
-    let lineChartDataFirst = myLineChart.data.datasets[0];
-    let lineChartDataSecond = myLineChart.data.datasets[1];
-    let lineChartLabels = myLineChart.data.labels;
-    lineChartDataFirst.data[i] = data[i][3];
-    lineChartDataSecond.data[i] = data[i][2];
-    lineChartLabels[i] = i;
+    lineChartDataFirst[i] = data[i][3];
+    lineChartDataSecond[i] = data[i][2];
+    lineChartLabels[i] = data[i][0];
   }
+
+  lineChartDataFirst = lineChartDataFirst.reverse();
+  lineChartDataSecond = lineChartDataSecond.reverse();
+  lineChartLabels = lineChartLabels.reverse();
   myLineChart.update();
 }
 
-function getDays(from, to) {
-  let difference = Math.abs(to - from);
-  let days = difference / (1000 * 60 * 60 * 24);
-
-  return days;
+function removeData(chart, length) {
+  for (let i = 0; i < length; i++) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data.pop();
+    });
+    chart.update();
+  }
 }

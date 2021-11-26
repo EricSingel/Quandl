@@ -19,9 +19,23 @@
         <a class="navbar-brand">Bitcoinkurs</a>
         <form class="d-flex" onsubmit="loadCourse(); return false;">
           <p class="m-2">Von</p>
-          <input id="from" required class="form-control me-2" type="date" />
+          <input
+            id="from"
+            min="2021-08-26"
+            max="2021-11-25"
+            required
+            class="form-control me-2"
+            type="date"
+          />
           <p class="m-2">Bis</p>
-          <input id="to" required class="form-control me-2" type="date" />
+          <input
+            id="to"
+            min="2021-08-26"
+            max="2021-11-25"
+            required
+            class="form-control me-2"
+            type="date"
+          />
           <button class="btn btn-outline-success">Search</button>
         </form>
       </div>
